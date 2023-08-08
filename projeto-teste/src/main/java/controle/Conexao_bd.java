@@ -13,14 +13,14 @@ public class Conexao_bd {
 		
 		private Conexao_bd() {}
 		
-		public static Conexao_bd getInstacia() {
+		public static Conexao_bd getInstancia() {
 			if (instancia == null) { 
 				instancia = new Conexao_bd(); 
 			}
 			return instancia;	
 		}
 		
-		public static Connection conectar() {
+		public Connection conectar() {
 			try {
 				conexao = DriverManager.getConnection("jdbc:mysql://localhost/"+ DATABASE + "?serverTimezone=UTC", USER, PSW);
 			} catch (Exception e) { 
