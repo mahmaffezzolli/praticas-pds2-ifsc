@@ -52,7 +52,7 @@ public class MovieDAO {
 		
 		Connection con = c.conectar();
 		
-		String query = "INSERT INTO teste(idMovie, nomeMovie) values (?,?) ";
+		String query = "INSERT INTO bancoteste(idMovie, nomeMovie) values (?,?) ";
 		
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
@@ -68,5 +68,50 @@ public class MovieDAO {
 		}
 		
 		return false;
+	}
+	
+	public boolean excluir (Movie m) {
+		Conexao c = Conexao.getInstancia();
+		Connection con = c.conectar();
+		
+		String query = 'DELETE FROM movie WHERE id_movie = ?';
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.SetInt(1, m.getId());
+			ps.executeDelete();
+			c.fecharConexao();
+			
+			return true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	public boolean atualizar (Movie m) {
+		Conexao c = Conexao.getInstancia();
+		Connection con = c.conectar();
+		
+		String query = 'UPDATE movie SET titulo_movie = ? WHERE id_movie = ?'
+				
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.SetString(1, m.gettitulo_movie());
+			ps.SetInt(2, m.getId());
+			
+			ps.executeUpdate();
+			c.fecharConexao();
+			
+			return true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false; 
 	}
 }
